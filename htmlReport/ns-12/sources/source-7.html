@@ -1,0 +1,97 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ShoppingCartService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.bl.webshop2024bl.Service</a>
+</div>
+
+<h1>Coverage Summary for Class: ShoppingCartService (hr.algebra.bl.webshop2024bl.Service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ShoppingCartService$MockitoMock$364453810</td>
+  </tr>
+  <tr>
+    <td class="name">ShoppingCartService$MockitoMock$364453810$auxiliary$dGVIEjIj</td>
+  </tr>
+  <tr>
+    <td class="name">ShoppingCartService$MockitoMock$364453810$auxiliary$sz17VbYH</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.bl.webshop2024bl.Service;
+&nbsp;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.ShoppingCart;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;public interface ShoppingCartService {
+&nbsp;    List&lt;ShoppingCart&gt; findAll();
+&nbsp;    ShoppingCart findById(long id);
+&nbsp;    Optional&lt;ShoppingCart&gt; findBySessionId(String sessionId);
+&nbsp;    Optional&lt;ShoppingCart&gt; findByUsername(String username);
+&nbsp;    ShoppingCart save(ShoppingCart obj);
+&nbsp;    void deleteById(long id);
+&nbsp;    void addItemToCart(String identifier, Long productId, Integer quantity, boolean isRegisteredUser);
+&nbsp;    void removeItemFromCart(String identifier, Long productId, Integer quantity, boolean isRegisteredUser);
+&nbsp;    ShoppingCart findOrCreateCart(String sessionIdOrUsername, boolean isRegisteredUser);
+&nbsp;    void linkCartToUser(String sessionId, String username);
+&nbsp;    int getCartItemCount(String sessionIdOrUsername, boolean isRegistered);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>

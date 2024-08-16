@@ -1,0 +1,95 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > NotificationMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.webshop2024.Mapper</a>
+</div>
+
+<h1>Coverage Summary for Class: NotificationMapper (hr.algebra.webshop2024.Mapper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">NotificationMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.webshop2024.Mapper;
+&nbsp;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Notification;
+&nbsp;import hr.algebra.webshop2024.DTO.DTONotification;
+&nbsp;import org.mapstruct.Mapper;
+&nbsp;import org.mapstruct.Mapping;
+&nbsp;
+&nbsp;@Mapper(componentModel = &quot;spring&quot;)
+&nbsp;public interface NotificationMapper {
+&nbsp;    @Mapping(target = &quot;notificationId&quot;, source = &quot;notificationId&quot;)
+&nbsp;    @Mapping(target = &quot;user&quot;, source = &quot;user&quot;)
+&nbsp;    @Mapping(target = &quot;title&quot;, source = &quot;title&quot;)
+&nbsp;    @Mapping(target = &quot;message&quot;, source = &quot;message&quot;)
+&nbsp;    @Mapping(target = &quot;createdAt&quot;, source = &quot;createdAt&quot;)
+&nbsp;    @Mapping(target = &quot;readAt&quot;, source = &quot;readAt&quot;)
+&nbsp;    @Mapping(target = &quot;viewed&quot;, source = &quot;viewed&quot;)
+&nbsp;    DTONotification NotificationToDTONotification(Notification source);
+&nbsp;
+&nbsp;    @Mapping(target = &quot;notificationId&quot;, source = &quot;notificationId&quot;)
+&nbsp;    @Mapping(target = &quot;user&quot;, source = &quot;user&quot;)
+&nbsp;    @Mapping(target = &quot;title&quot;, source = &quot;title&quot;)
+&nbsp;    @Mapping(target = &quot;message&quot;, source = &quot;message&quot;)
+&nbsp;    @Mapping(target = &quot;createdAt&quot;, source = &quot;createdAt&quot;)
+&nbsp;    @Mapping(target = &quot;readAt&quot;, source = &quot;readAt&quot;)
+&nbsp;    @Mapping(target = &quot;viewed&quot;, source = &quot;viewed&quot;)
+&nbsp;    Notification DTONotificationToNotification(DTONotification destination);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>

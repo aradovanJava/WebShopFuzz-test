@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > OrderItemServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.bl.webshop2024bl.ServiceImp</a>
+</div>
+
+<h1>Coverage Summary for Class: OrderItemServiceImpl (hr.algebra.bl.webshop2024bl.ServiceImp)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OrderItemServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.bl.webshop2024bl.ServiceImp;
+&nbsp;
+&nbsp;import hr.algebra.bl.webshop2024bl.Service.OrderItemService;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Order;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.OrderItem;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Product;
+&nbsp;import hr.algebra.dal.webshop2024dal.Repository.OrderItemRepository;
+&nbsp;import hr.algebra.utils.CustomExceptions.CustomNotFoundException;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import javax.transaction.Transactional;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class OrderItemServiceImpl implements OrderItemService {
+&nbsp;    private final OrderItemRepository orderItemRepo;
+&nbsp;
+<b class="nc">&nbsp;    public OrderItemServiceImpl(OrderItemRepository orderItemRepo) {</b>
+<b class="nc">&nbsp;        this.orderItemRepo = orderItemRepo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;OrderItem&gt; findAll() {
+<b class="nc">&nbsp;        return orderItemRepo.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public OrderItem findById(long id) {
+<b class="nc">&nbsp;        Optional&lt;OrderItem&gt; orderItemOptional = orderItemRepo.findById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!orderItemOptional.isPresent()){</b>
+<b class="nc">&nbsp;            throw new CustomNotFoundException(&quot;Order Item id not found - &quot; + id);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return orderItemOptional.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Optional&lt;OrderItem&gt; findByOrderAndProduct(Order order, Product product) {
+<b class="nc">&nbsp;        return orderItemRepo.findByOrderAndProduct(order,product);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;OrderItem&gt; findByOrder(Order order) {
+<b class="nc">&nbsp;        return orderItemRepo.findByOrder(order);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Transactional
+&nbsp;    public OrderItem save(OrderItem obj) {
+<b class="nc">&nbsp;        return orderItemRepo.save(obj);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deleteById(long id) {
+<b class="nc">&nbsp;        Optional&lt;OrderItem&gt; checkIfExists = orderItemRepo.findById(id);</b>
+<b class="nc">&nbsp;        if (!checkIfExists.isPresent()){</b>
+<b class="nc">&nbsp;            throw new CustomNotFoundException(&quot;Order Item with that ID was not found: &quot; + id);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        orderItemRepo.deleteById(id);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>

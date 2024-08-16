@@ -1,0 +1,213 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > CategoryRestController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.api.webshop2024api.Rest</a>
+</div>
+
+<h1>Coverage Summary for Class: CategoryRestController (hr.algebra.api.webshop2024api.Rest)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CategoryRestController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (21/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.api.webshop2024api.Rest;
+&nbsp;
+&nbsp;
+&nbsp;import hr.algebra.api.webshop2024api.ApiDTO.DTOCategory;
+&nbsp;import hr.algebra.api.webshop2024api.ApiMapper.CategoryMapper;
+&nbsp;import hr.algebra.bl.webshop2024bl.Service.CategoryService;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Category;
+&nbsp;import hr.algebra.utils.CustomExceptions.CustomNotFoundException;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.scheduling.annotation.Async;
+&nbsp;import javax.validation.Valid;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.CompletableFuture;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/webShopApi&quot;)
+&nbsp;public class CategoryRestController {
+&nbsp;    private final CategoryService categoryService;
+&nbsp;    private final CategoryMapper categoryMapper;
+&nbsp;
+<b class="fc">&nbsp;    public CategoryRestController(CategoryService categoryService, CategoryMapper categoryMapper) {</b>
+<b class="fc">&nbsp;        this.categoryService = categoryService;</b>
+<b class="fc">&nbsp;        this.categoryMapper = categoryMapper;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    @GetMapping(&quot;/categories/allCategories&quot;)
+&nbsp;    public CompletableFuture&lt;List&lt;DTOCategory&gt;&gt; findAllCategories(){
+<b class="fc">&nbsp;        return CompletableFuture.completedFuture(</b>
+<b class="fc">&nbsp;                categoryService.findAll()</b>
+<b class="fc">&nbsp;                        .stream()</b>
+<b class="nc">&nbsp;                        .map(categoryMapper::CategoryItemToDTOCategory)</b>
+<b class="nc">&nbsp;                        .collect(Collectors.toList())</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    @GetMapping(&quot;/categories/{categoryId}&quot;)
+&nbsp;    public CompletableFuture&lt;DTOCategory&gt; findCategoryById(@PathVariable int categoryId) {
+<b class="fc">&nbsp;        Category category = categoryService.findById(categoryId);</b>
+<b class="nc">&nbsp;        if (category == null) {</b>
+<b class="nc">&nbsp;            throw new CustomNotFoundException(&quot;Category not found for id: &quot; + categoryId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return CompletableFuture.completedFuture(categoryMapper.CategoryItemToDTOCategory(category));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @PostMapping(&quot;/categories&quot;)
+&nbsp;    public CompletableFuture&lt;DTOCategory&gt; createCategory(@Valid @RequestBody DTOCategory dtoCategory) {
+<b class="fc">&nbsp;        Category newCategory = categoryMapper.DTOCategoryToCategory(dtoCategory);</b>
+<b class="fc">&nbsp;        Category savedCategory = categoryService.save(newCategory);</b>
+<b class="fc">&nbsp;        return CompletableFuture.supplyAsync(() -&gt; categoryMapper.CategoryItemToDTOCategory(savedCategory))</b>
+<b class="fc">&nbsp;                .thenApplyAsync(savedDtoCategory -&gt; {</b>
+<b class="fc">&nbsp;                    return savedDtoCategory;</b>
+&nbsp;                });
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    @PutMapping(&quot;/categories/{categoryId}&quot;)
+&nbsp;    public CompletableFuture&lt;DTOCategory&gt; updateCategory(@PathVariable int categoryId, @Valid @RequestBody DTOCategory category){
+<b class="fc">&nbsp;        Category extistingCategory = categoryService.findById(categoryId);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (extistingCategory == null) {</b>
+<b class="fc">&nbsp;            throw new CustomNotFoundException(&quot;Category not found for id: &quot; + categoryId);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        extistingCategory.setName(category.getName());</b>
+&nbsp;
+<b class="fc">&nbsp;        Category updatedCategory = categoryService.save(extistingCategory);</b>
+&nbsp;
+<b class="fc">&nbsp;        return CompletableFuture.completedFuture(categoryMapper.CategoryItemToDTOCategory(updatedCategory));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    @DeleteMapping(&quot;/categories/{categoryId}&quot;)
+&nbsp;    public CompletableFuture&lt;String&gt; deleteCategory(@PathVariable int categoryId){
+<b class="fc">&nbsp;        Category categoryToDelete = categoryService.findById(categoryId);</b>
+<b class="pc">&nbsp;        if (categoryToDelete == null){</b>
+<b class="fc">&nbsp;            throw new CustomNotFoundException((&quot;Category id not found - &quot; + categoryId));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        categoryService.deleteById(categoryId);</b>
+&nbsp;
+<b class="nc">&nbsp;        return CompletableFuture.completedFuture(&quot;Deleted category with ID: &quot; + categoryId);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>

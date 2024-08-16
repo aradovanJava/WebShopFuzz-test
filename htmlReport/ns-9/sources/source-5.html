@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > NotificationServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.bl.webshop2024bl.ServiceImp</a>
+</div>
+
+<h1>Coverage Summary for Class: NotificationServiceImpl (hr.algebra.bl.webshop2024bl.ServiceImp)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotificationServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.bl.webshop2024bl.ServiceImp;
+&nbsp;
+&nbsp;import hr.algebra.bl.webshop2024bl.Service.NotificationService;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Notification;
+&nbsp;import hr.algebra.dal.webshop2024dal.Repository.NotificationRepository;
+&nbsp;import hr.algebra.utils.CustomExceptions.CustomNotFoundException;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class NotificationServiceImpl implements NotificationService {
+&nbsp;    private final NotificationRepository notificationRepository;
+&nbsp;
+<b class="nc">&nbsp;    public NotificationServiceImpl(NotificationRepository notificationRepository) {</b>
+<b class="nc">&nbsp;        this.notificationRepository = notificationRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Notification&gt; findAll() {
+<b class="nc">&nbsp;        return notificationRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Notification findById(long id) {
+<b class="nc">&nbsp;        Optional&lt;Notification&gt; notificationOptional = notificationRepository.findById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (!notificationOptional.isPresent()){</b>
+<b class="nc">&nbsp;            throw new CustomNotFoundException(&quot;Notification id not found - &quot; + id);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return notificationOptional.get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Notification save(Notification obj) {
+<b class="nc">&nbsp;        return notificationRepository.save(obj);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deleteById(long id) {
+<b class="nc">&nbsp;        Optional&lt;Notification&gt; checkIfExists = notificationRepository.findById(id);</b>
+<b class="nc">&nbsp;        if (!checkIfExists.isPresent()){</b>
+<b class="nc">&nbsp;            throw new CustomNotFoundException(&quot;Notification with that ID was not found: &quot; + id);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        notificationRepository.deleteById(id);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>

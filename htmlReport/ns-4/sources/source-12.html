@@ -1,0 +1,96 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ProductMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.api.webshop2024api.ApiMapper</a>
+</div>
+
+<h1>Coverage Summary for Class: ProductMapper (hr.algebra.api.webshop2024api.ApiMapper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ProductMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.api.webshop2024api.ApiMapper;
+&nbsp;
+&nbsp;import hr.algebra.api.webshop2024api.ApiDTO.DTOProduct;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Product;
+&nbsp;import org.mapstruct.Mapper;
+&nbsp;import org.mapstruct.Mapping;
+&nbsp;
+&nbsp;@Mapper(componentModel = &quot;spring&quot;)
+&nbsp;public interface ProductMapper {
+&nbsp;
+&nbsp;
+&nbsp;    @Mapping(target = &quot;productId&quot;, source = &quot;productId&quot;)
+&nbsp;    @Mapping(target = &quot;name&quot;, source = &quot;name&quot;)
+&nbsp;    @Mapping(target = &quot;description&quot;, source = &quot;description&quot;)
+&nbsp;    @Mapping(target = &quot;price&quot;, source = &quot;price&quot;)
+&nbsp;    @Mapping(target = &quot;subcategory&quot;, source = &quot;subcategory&quot;)
+&nbsp;    @Mapping(target = &quot;b64image&quot;, source = &quot;image.b64image&quot;)
+&nbsp;    DTOProduct ProductToDTOProduct(Product source);
+&nbsp;
+&nbsp;    @Mapping(target = &quot;productId&quot;, source = &quot;productId&quot;)
+&nbsp;    @Mapping(target = &quot;name&quot;, source = &quot;name&quot;)
+&nbsp;    @Mapping(target = &quot;description&quot;, source = &quot;description&quot;)
+&nbsp;    @Mapping(target = &quot;price&quot;, source = &quot;price&quot;)
+&nbsp;    @Mapping(target = &quot;subcategory&quot;, source = &quot;subcategory&quot;)
+&nbsp;    @Mapping(target = &quot;image&quot;, ignore = true)
+&nbsp;    Product DTOProductToProduct(DTOProduct destination);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>

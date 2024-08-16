@@ -1,0 +1,89 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > CartItemMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.api.webshop2024api.ApiMapper</a>
+</div>
+
+<h1>Coverage Summary for Class: CartItemMapper (hr.algebra.api.webshop2024api.ApiMapper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">CartItemMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.api.webshop2024api.ApiMapper;
+&nbsp;
+&nbsp;import hr.algebra.api.webshop2024api.ApiDTO.DTOCartItem;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.CartItem;
+&nbsp;import org.mapstruct.Mapper;
+&nbsp;import org.mapstruct.Mapping;
+&nbsp;
+&nbsp;@Mapper(componentModel = &quot;spring&quot;)
+&nbsp;public interface CartItemMapper {
+&nbsp;    @Mapping(target = &quot;cartItemId&quot;, source = &quot;cartItemId&quot;)
+&nbsp;    @Mapping(target = &quot;shoppingCart&quot;, source = &quot;shoppingCart&quot;)
+&nbsp;    @Mapping(target = &quot;product&quot;, source = &quot;product&quot;)
+&nbsp;    @Mapping(target = &quot;quantity&quot;, source = &quot;quantity&quot;)
+&nbsp;    DTOCartItem CartItemToDTOCartItem(CartItem source);
+&nbsp;
+&nbsp;    @Mapping(target = &quot;cartItemId&quot;, source = &quot;cartItemId&quot;)
+&nbsp;    @Mapping(target = &quot;shoppingCart&quot;, source = &quot;shoppingCart&quot;)
+&nbsp;    @Mapping(target = &quot;product&quot;, source = &quot;product&quot;)
+&nbsp;    @Mapping(target = &quot;quantity&quot;, source = &quot;quantity&quot;)
+&nbsp;    CartItem DTOCartItemToCartItem(DTOCartItem destination);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ProductRestController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.api.webshop2024api.Rest</a>
+</div>
+
+<h1>Coverage Summary for Class: ProductRestController (hr.algebra.api.webshop2024api.Rest)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProductRestController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.1%
+  </span>
+  <span class="absValue">
+    (31/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.api.webshop2024api.Rest;
+&nbsp;
+&nbsp;import hr.algebra.api.webshop2024api.ApiDTO.DTOProduct;
+&nbsp;import hr.algebra.api.webshop2024api.ApiMapper.ProductMapper;
+&nbsp;import hr.algebra.api.webshop2024api.ApiMapper.SubcategoryMapper;
+&nbsp;import hr.algebra.bl.webshop2024bl.Service.ProductService;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Image;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Product;
+&nbsp;import hr.algebra.utils.CustomExceptions.CustomNotFoundException;
+&nbsp;import javax.validation.Valid;
+&nbsp;
+&nbsp;import hr.algebra.utils.CustomExceptions.ImageProcessingException;
+&nbsp;import hr.algebra.utils.ImageConverter.ImageConverter;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.scheduling.annotation.Async;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;import java.util.concurrent.CompletableFuture;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/webShopApi&quot;)
+&nbsp;public class ProductRestController {
+&nbsp;    private final ProductService productService;
+&nbsp;    private final ProductMapper productMapper;
+&nbsp;    private final SubcategoryMapper subcategoryMapper;
+&nbsp;    private final ImageConverter imageConverter;
+&nbsp;
+<b class="fc">&nbsp;    public ProductRestController(ProductService productService, ProductMapper productMapper, SubcategoryMapper subcategoryMapper) {</b>
+<b class="fc">&nbsp;        this.productService = productService;</b>
+<b class="fc">&nbsp;        this.productMapper = productMapper;</b>
+<b class="fc">&nbsp;        this.subcategoryMapper = subcategoryMapper;</b>
+<b class="fc">&nbsp;        imageConverter = new ImageConverter(320,320,&quot;png&quot;);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    @GetMapping(&quot;/products/allProducts&quot;)
+&nbsp;    public CompletableFuture&lt;List&lt;DTOProduct&gt;&gt; findAllProducts(){
+<b class="fc">&nbsp;        return CompletableFuture.completedFuture(</b>
+<b class="fc">&nbsp;                productService.findAll()</b>
+<b class="fc">&nbsp;                        .stream()</b>
+<b class="fc">&nbsp;                        .map(productMapper::ProductToDTOProduct)</b>
+<b class="fc">&nbsp;                        .collect(Collectors.toList())</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    @GetMapping(&quot;/products/{productId}&quot;)
+&nbsp;    public CompletableFuture&lt;DTOProduct&gt; findProductById(@PathVariable int productId) {
+<b class="fc">&nbsp;        Product product = productService.findById(productId);</b>
+<b class="fc">&nbsp;        if (product == null) {</b>
+<b class="fc">&nbsp;            throw new CustomNotFoundException(&quot;Product not found for id: &quot; + productId);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return CompletableFuture.completedFuture(productMapper.ProductToDTOProduct(product));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @PostMapping(&quot;/products&quot;)
+&nbsp;    public CompletableFuture&lt;DTOProduct&gt; createProduct(@Valid @RequestBody DTOProduct dtoProduct) {
+&nbsp;        String base64img;
+&nbsp;        try {
+<b class="fc">&nbsp;            base64img = imageConverter.convertToBase64(dtoProduct.getImageUrl());</b>
+<b class="fc">&nbsp;        } catch (IOException e) {</b>
+<b class="fc">&nbsp;            throw new ImageProcessingException(e.getMessage());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Product newProduct = productMapper.DTOProductToProduct(dtoProduct);</b>
+<b class="nc">&nbsp;        newProduct.setImage(new Image(base64img));</b>
+<b class="nc">&nbsp;        Product savedProduct = productService.save(newProduct);</b>
+&nbsp;
+<b class="nc">&nbsp;        return CompletableFuture.supplyAsync(() -&gt; productMapper.ProductToDTOProduct(savedProduct))</b>
+<b class="nc">&nbsp;                .thenApplyAsync(savedDtoProduct -&gt; savedDtoProduct);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    @PutMapping(&quot;/products/{productId}&quot;)
+&nbsp;    public CompletableFuture&lt;DTOProduct&gt; updateProduct(@PathVariable int productId, @Valid @RequestBody DTOProduct product){
+<b class="fc">&nbsp;        Product extistingProduct = productService.findById(productId);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (extistingProduct == null) {</b>
+<b class="fc">&nbsp;            throw new CustomNotFoundException(&quot;Product not found for id: &quot; + productId);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        extistingProduct.setName(product.getName());</b>
+<b class="fc">&nbsp;        extistingProduct.setDescription(product.getDescription());</b>
+<b class="fc">&nbsp;        extistingProduct.setPrice(product.getPrice());</b>
+<b class="fc">&nbsp;        extistingProduct.setSubcategory(subcategoryMapper.DTOSubcategoryToSubcategory(product.getSubcategory()));</b>
+&nbsp;
+<b class="fc">&nbsp;        Product updatedProduct = productService.save(extistingProduct);</b>
+&nbsp;
+<b class="fc">&nbsp;        return CompletableFuture.completedFuture(productMapper.ProductToDTOProduct(updatedProduct));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Async
+&nbsp;    @ResponseBody
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    @DeleteMapping(&quot;/products/{productId}&quot;)
+&nbsp;    public CompletableFuture&lt;String&gt; deleteProduct(@PathVariable int productId){
+<b class="fc">&nbsp;        Product productToDelete = productService.findById(productId);</b>
+<b class="fc">&nbsp;        if (productToDelete == null){</b>
+<b class="fc">&nbsp;            throw new CustomNotFoundException((&quot;Product id not found - &quot; + productId));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        productService.deleteById(productId);</b>
+&nbsp;
+<b class="fc">&nbsp;        return CompletableFuture.completedFuture(&quot;Deleted product with ID: &quot; + productId);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > SubcategoryMapperImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">hr.algebra.api.webshop2024api.ApiMapper</a>
+</div>
+
+<h1>Coverage Summary for Class: SubcategoryMapperImpl (hr.algebra.api.webshop2024api.ApiMapper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SubcategoryMapperImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package hr.algebra.api.webshop2024api.ApiMapper;
+&nbsp;
+&nbsp;import hr.algebra.api.webshop2024api.ApiDTO.DTOCategory;
+&nbsp;import hr.algebra.api.webshop2024api.ApiDTO.DTOSubcategory;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Category;
+&nbsp;import hr.algebra.dal.webshop2024dal.Entity.Subcategory;
+&nbsp;import javax.annotation.Generated;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;@Generated(
+&nbsp;    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+&nbsp;    date = &quot;2024-07-20T18:34:23+0200&quot;,
+&nbsp;    comments = &quot;version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)&quot;
+&nbsp;)
+&nbsp;@Component
+<b class="fc">&nbsp;public class SubcategoryMapperImpl implements SubcategoryMapper {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public DTOSubcategory SubcategoryToDTOSubcategory(Subcategory source) {
+<b class="fc">&nbsp;        if ( source == null ) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        DTOSubcategory dTOSubcategory = new DTOSubcategory();</b>
+&nbsp;
+<b class="fc">&nbsp;        dTOSubcategory.setSubcategoryId( source.getSubcategoryId() );</b>
+<b class="fc">&nbsp;        dTOSubcategory.setName( source.getName() );</b>
+<b class="fc">&nbsp;        dTOSubcategory.setCategory( categoryToDTOCategory( source.getCategory() ) );</b>
+&nbsp;
+<b class="fc">&nbsp;        return dTOSubcategory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Subcategory DTOSubcategoryToSubcategory(DTOSubcategory destination) {
+<b class="fc">&nbsp;        if ( destination == null ) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Subcategory subcategory = new Subcategory();</b>
+&nbsp;
+<b class="fc">&nbsp;        subcategory.setSubcategoryId( destination.getSubcategoryId() );</b>
+<b class="fc">&nbsp;        subcategory.setName( destination.getName() );</b>
+<b class="fc">&nbsp;        subcategory.setCategory( dTOCategoryToCategory( destination.getCategory() ) );</b>
+&nbsp;
+<b class="fc">&nbsp;        return subcategory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected DTOCategory categoryToDTOCategory(Category category) {
+<b class="fc">&nbsp;        if ( category == null ) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        DTOCategory dTOCategory = new DTOCategory();</b>
+&nbsp;
+<b class="fc">&nbsp;        dTOCategory.setCategoryId( category.getCategoryId() );</b>
+<b class="fc">&nbsp;        dTOCategory.setName( category.getName() );</b>
+&nbsp;
+<b class="fc">&nbsp;        return dTOCategory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Category dTOCategoryToCategory(DTOCategory dTOCategory) {
+<b class="fc">&nbsp;        if ( dTOCategory == null ) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Category category = new Category();</b>
+&nbsp;
+<b class="fc">&nbsp;        category.setCategoryId( dTOCategory.getCategoryId() );</b>
+<b class="fc">&nbsp;        category.setName( dTOCategory.getName() );</b>
+&nbsp;
+<b class="fc">&nbsp;        return category;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-07-20 21:09</div>
+</div>
+</body>
+</html>
